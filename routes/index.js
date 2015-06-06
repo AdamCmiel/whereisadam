@@ -4,7 +4,7 @@ var IG = require('instagram-location')
 
 
 /* GET home page. */
-router.get('/:username', function(req, res, next) {
+function findOnInstagram(req, res, next) {
   try {
     var ig = new IG({
         clientID: process.env.IG_CLIENT_ID
@@ -18,7 +18,9 @@ router.get('/:username', function(req, res, next) {
         res.render('index', data);
     })
     .catch(function(err) {
-        res.write('error')
+        console.error(err)
+        res.writeHead(404)
+        res.write('error ')
         res.write(err.message)
         res.end()
     })
@@ -27,6 +29,9 @@ router.get('/:username', function(req, res, next) {
   catch (error) {
     next(error)
   }
-});
+}
+
+router.get('/:username', findOnInstagram)
+router.get('/', findOnInstagram)
 
 module.exports = router;
