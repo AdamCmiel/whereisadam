@@ -21,7 +21,7 @@ function findOnInstagram(req, res, next) {
     })
     .catch(function(err) {
         console.error(err)
-        consoel.error(err.stack)
+        console.error(err.stack)
         res.writeHead(404)
         res.write('error ')
         res.write(err.message)
